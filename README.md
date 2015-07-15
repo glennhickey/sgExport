@@ -5,5 +5,5 @@ Some code quickly spun off from [hal2sg](https://github.com/glennhickey/hal2sg) 
 ## Contents
 
 * sidegraph.h: Very basic in-memory sidegraph implementation, translated pretty much direclty from GA4GH schema (at the time). 
-* sgloopup.h: Map interval from one graph to another. 
-* sgsql.h: Write SQL insertrs. 
+* sglookup.h: Map interval from one graph to another. 
+* sgsql.h: Write SQL inserts and fasta sequences
