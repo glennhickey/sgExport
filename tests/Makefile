@@ -1,5 +1,6 @@
-rootPath = ..
+rootPath = ../..
 include ${rootPath}/include.mk
+basePath = ..
 
 all : unitTests
 
@@ -12,14 +13,14 @@ CuTest.o : CuTest.h CuTest.c
 	${cxx} ${cflags} -c CuTest.c	
 
 unitTests.o : unitTests.h unitTests.cpp
-	${cpp} ${cppflags} -I${rootPath}/ unitTests.cpp -c
+	${cpp} ${cppflags} -I${basePath}/ unitTests.cpp -c
 
-sidegraphTests.o : sidegraphTests.cpp ${rootPath}/*.h
-	${cpp} ${cppflags} -I${rootPath}/ sidegraphTests.cpp -c
+sidegraphTests.o : sidegraphTests.cpp ${basePath}/*.h
+	${cpp} ${cppflags} -I${basePath}/ sidegraphTests.cpp -c
 
-sglookupTests.o : sglookupTests.cpp ${rootPath}/*.h
-	${cpp} ${cppflags} -I${rootPath}/ sglookupTests.cpp -c
+sglookupTests.o : sglookupTests.cpp ${basePath}/*.h
+	${cpp} ${cppflags} -I${basePath}/ sglookupTests.cpp -c
 
-unitTests : CuTest.o unitTests.o sidegraphTests.o sglookupTests.o ${rootPath}/sgExport.a
-	${cpp} -I${rootPath}/ ${cppflags} ${rootPath}/sgExport.a CuTest.o unitTests.o sidegraphTests.o sglookupTests.o -o unitTests
+unitTests : CuTest.o unitTests.o sidegraphTests.o sglookupTests.o ${basePath}/sgExport.a
+	${cpp} -I${basePath}/ ${cppflags} ${basePath}/sgExport.a CuTest.o unitTests.o sidegraphTests.o sglookupTests.o -o unitTests
 

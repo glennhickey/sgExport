@@ -1,4 +1,6 @@
-include ./include.mk
+# this library only used as submodule that relies on include.mk in parent directory. 
+rootPath=..
+include ${rootPath}/include.mk
 
 sidegraphInc = sidegraph.h sgcommon.h sgsequence.h sgposition.h sgside.h sgjoin.h sgsegment.h
 
