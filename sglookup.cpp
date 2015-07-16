@@ -142,7 +142,8 @@ SGSide SGLookup::mapPosition(const SGPosition& inPos, sg_int_t* outDist,
 
 void SGLookup::getPath(const SGPosition& startPos,
                        const SGPosition& endPos,
-                       vector<SGSegment>& outPath) const
+                       vector<SGSegment>& outPath,
+                       bool append) const
 {
   SGPosition halStart = startPos;
   SGPosition halEnd = endPos;
@@ -173,7 +174,10 @@ void SGLookup::getPath(const SGPosition& startPos,
     ++j;
   }
 
-  outPath.clear();
+  if (!append)
+  {
+    outPath.clear();
+  }
   sg_int_t pathLength = 0;
 
   sg_int_t prevHalPos = halStart.getPos();

@@ -61,7 +61,8 @@ public:
     */
    void getPath(const SGPosition& startPos,
                 const SGPosition& endPos,
-                std::vector<SGSegment>& outPath) const;
+                std::vector<SGSegment>& outPath,
+                bool append = false) const;
                  
 protected: 
 
