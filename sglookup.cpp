@@ -142,8 +142,7 @@ SGSide SGLookup::mapPosition(const SGPosition& inPos, sg_int_t* outDist,
 
 void SGLookup::getPath(const SGPosition& startPos,
                        const SGPosition& endPos,
-                       vector<SGSegment>& outPath,
-                       bool append) const
+                       vector<SGSegment>& outPath) const
 {
   SGPosition halStart = startPos;
   SGPosition halEnd = endPos;
@@ -174,10 +173,6 @@ void SGLookup::getPath(const SGPosition& startPos,
     ++j;
   }
 
-  if (!append)
-  {
-    outPath.clear();
-  }
   sg_int_t pathLength = 0;
 
   sg_int_t prevHalPos = halStart.getPos();
@@ -233,7 +228,20 @@ void SGLookup::getPath(const SGPosition& startPos,
     prevSgSide.setBase(SGPosition(prevSgSide.getBase().getSeqID(),
                                   prevSgSide.getBase().getPos() + segLen -1));
   }
-  outPath.push_back(SGSegment(prevSgSide, segLen));
+  // merge two consecutive segments that can be walked without a join
+  SGSegment nextSeg(prevSgSide, segLen);
+  if (false && !outPath.empty() &&
+      outPath.back().getSide().getForward() ==
+      nextSeg.getSide().getForward() &&
+      outPath.back().getOutSide().lengthTo(nextSeg.getInSide()) == 0)
+  {
+    outPath.back().setLength(outPath.back().getLength() +
+                             nextSeg.getLength());
+  }
+  else
+  {
+    outPath.push_back(SGSegment(prevSgSide, segLen));
+  }
   pathLength += segLen;
   (void)pathLength;
   assert(pathLength == halEnd.getPos() - halStart.getPos() + 1);
