@@ -22,5 +22,5 @@ sglookupTests.o : sglookupTests.cpp ${basePath}/*.h
 	${cpp} ${cppflags} -I${basePath}/ sglookupTests.cpp -c
 
 unitTests : CuTest.o unitTests.o sidegraphTests.o sglookupTests.o ${basePath}/sgExport.a
-	${cpp} -I${basePath}/ ${cppflags} ${basePath}/sgExport.a CuTest.o unitTests.o sidegraphTests.o sglookupTests.o -o unitTests
+	${cpp} -I${basePath}/ ${cppflags}  unitTests.o sidegraphTests.o sglookupTests.o ${basePath}/sgExport.a CuTest.o -o unitTests
 
