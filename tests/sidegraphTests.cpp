@@ -51,6 +51,19 @@ void sideGraphTestSide(CuTest *testCase)
   CuAssertTrue(testCase, s2r.lengthTo(s2r) == 0);
   CuAssertTrue(testCase, s2r.lengthTo(s3f) == -1);
   CuAssertTrue(testCase, s2r.lengthTo(s3r) == -1);
+
+  SGPosition p4(0,6);
+  SGSide s4f(p4, false);
+  SGSide s4r(p4, true);
+  CuAssertTrue(testCase, SGJoin(s1f, s4r).isTrivial());
+  CuAssertTrue(testCase, !SGJoin(s1f, s4f).isTrivial());
+  CuAssertTrue(testCase, !SGJoin(s1r, s4r).isTrivial());
+  CuAssertTrue(testCase, !SGJoin(s1r, s4f).isTrivial());
+
+  CuAssertTrue(testCase, SGJoin(s4r, s1f).isTrivial());
+  CuAssertTrue(testCase, !SGJoin(s4f, s1f).isTrivial());
+  CuAssertTrue(testCase, !SGJoin(s4r, s1r).isTrivial());
+  CuAssertTrue(testCase, !SGJoin(s4f, s1r).isTrivial());
 }
 
 /** test Segment construction from sides function */
