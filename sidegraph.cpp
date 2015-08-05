@@ -28,6 +28,34 @@ SideGraph::~SideGraph()
   }
 }
 
+bool SideGraph::operator==(const SideGraph& sg) const
+{
+  if (getNumSequences() != sg.getNumSequences() ||
+      _joinSet.size() != sg._joinSet.size())
+  {
+    return false;
+  }
+
+  for (int i = 0; i < getNumSequences(); ++i)
+  {
+    if (*getSequence(i) != *sg.getSequence(i))
+    {
+      return false;
+    }
+  }
+  
+  JoinSet::const_iterator i = _joinSet.begin();
+  JoinSet::const_iterator j = sg._joinSet.begin();
+  for (; i != _joinSet.end(); ++i, ++j)
+  {
+    if (**i != **j)
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
 ostream& operator<<(ostream& os, const SideGraph& sg)
 {
   os << "SideGraph {\n";

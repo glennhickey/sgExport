@@ -32,6 +32,9 @@ public:
    void setLength(sg_int_t length);
    void setName(const std::string& name);
 
+   bool operator==(const SGSequence& seq) const;
+   bool operator!=(const SGSequence& seq) const;
+
 protected:
 
    sg_seqid_t _id;
@@ -91,6 +94,18 @@ inline void SGSequence::setLength(sg_int_t length)
 inline void SGSequence::setName(const std::string& name)
 {
   _name = name;
+}
+
+inline bool SGSequence::operator==(const SGSequence& seq) const
+{
+  return getID() == seq.getID() && getLength() == seq.getLength() &&
+     getName() == seq.getName();
+}
+
+inline bool SGSequence::operator!=(const SGSequence& seq) const
+{
+  return getID() != seq.getID() || getLength() != seq.getLength() ||
+     getName() != seq.getName();
 }
 
 inline std::ostream& operator<<(std::ostream& os, const SGSequence& s)

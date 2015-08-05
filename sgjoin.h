@@ -33,6 +33,7 @@ public:
    
    bool operator<(const SGJoin& j2) const;
    bool operator==(const SGJoin& j2) const;
+   bool operator!=(const SGJoin& j2) const;
 
 protected:
    
@@ -108,6 +109,11 @@ inline bool SGJoin::operator<(const SGJoin& j2) const
 inline bool SGJoin::operator==(const SGJoin& j2) const
 {
   return _side1 == j2._side1 && _side2 == j2._side2;
+}
+
+inline bool SGJoin::operator!=(const SGJoin& j2) const
+{
+  return _side1 != j2._side1 || _side2 != j2._side2;
 }
 
 inline std::ostream& operator<<(std::ostream& os, const SGJoin& j) {

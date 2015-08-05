@@ -73,6 +73,11 @@ public:
     * ID field will be ignored and updated automatically
     */
    const SGSequence* addSequence(SGSequence* seq);
+
+   /** 
+    * Are two graphs exactly the same?
+    */
+   bool operator==(const SideGraph& sg) const;
    
 protected:
 
