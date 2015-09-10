@@ -8,6 +8,7 @@ all : sgExport.a
 
 clean : 
 	rm -f  sidegraph.o sglookup.o md5.o sgsql.o sgExport.a
+	cd tests && make clean
 
 unitTests : sgExport.a
 	cd tests && make
