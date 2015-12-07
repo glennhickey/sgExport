@@ -60,7 +60,8 @@ public:
     * through the side graph.   
     */
    void getPath(const SGPosition& startPos,
-                const SGPosition& endPos,
+                sg_int_t length,
+                bool forward,
                 std::vector<SGSegment>& outPath) const;
                  
 protected: 

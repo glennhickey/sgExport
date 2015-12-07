@@ -141,18 +141,17 @@ SGSide SGLookup::mapPosition(const SGPosition& inPos, sg_int_t* outDist,
 }
 
 void SGLookup::getPath(const SGPosition& startPos,
-                       const SGPosition& endPos,
+                       sg_int_t length,
+                       bool forward,
                        vector<SGSegment>& outPath) const
 {
-  SGPosition halStart = startPos;
-  SGPosition halEnd = endPos;
-  bool backward = endPos < startPos;
-  if (backward == true)
-  {
-    // always make a forward path.  if query is reversed, we will
-    // remember here and flip at very end. 
-    swap(halStart, halEnd);
-  }
+  // we always work left-to-right, then flip back at end if needed
+  SGPosition halStart = SGPosition(startPos.getSeqID(),
+                                   forward ? startPos.getPos() :
+                                   startPos.getPos() - length + 1);
+  SGPosition halEnd = SGPosition(startPos.getSeqID(),
+                                 forward ? startPos.getPos() + length - 1 :
+                                 startPos.getPos());
   
   assert(halStart.getSeqID() == halEnd.getSeqID());
 
@@ -248,7 +247,7 @@ void SGLookup::getPath(const SGPosition& startPos,
 
   // we really wanted our path in the other direction.  flip the
   // order of the vector, and the orientation of every segment. 
-  if (backward == true)
+  if (forward == false)
   {
     reverse(outPath.begin(), outPath.end());
     for (size_t i = 0; i < outPath.size(); ++i)

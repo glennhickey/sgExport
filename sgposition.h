@@ -29,6 +29,7 @@ public:
    void setPos(sg_int_t pos);
 
    bool operator<(const SGPosition& p2) const;
+   bool operator<=(const SGPosition& p2) const;
    bool operator==(const SGPosition& p2) const;
    bool operator!=(const SGPosition& p2) const;
    
@@ -88,6 +89,11 @@ inline bool SGPosition::operator<(const SGPosition& p2) const
 inline bool SGPosition::operator==(const SGPosition& p2) const
 {
   return _seqid == p2._seqid && _pos == p2._pos;
+}
+
+inline bool SGPosition::operator<=(const SGPosition& p2) const
+{
+  return !(p2 < *this);
 }
 
 inline bool SGPosition::operator!=(const SGPosition& p2) const

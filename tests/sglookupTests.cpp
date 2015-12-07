@@ -194,8 +194,12 @@ void pathTest(CuTest *testCase)
   vector<SGSegment> path;
   SGSegment last = srcSegments.back();
   last.flip();
-  lookup.getPath(srcSegments[0].getSide().getBase(), last.getSide().getBase(),
-                 path);
+  SGPosition pathStart = srcSegments[0].getSide().getBase();
+  SGPosition pathEnd = last.getSide().getBase();
+  bool pathForward = pathStart <= pathEnd;
+  int pathLength = 1 + (pathForward ? pathEnd.getPos() - pathStart.getPos() :
+                        pathStart.getPos() - pathEnd.getPos());
+  lookup.getPath(pathStart, pathLength, pathForward, path);
 
   CuAssertTrue(testCase, path == tgtSegments);
 
@@ -235,19 +239,23 @@ void pathTest(CuTest *testCase)
     lookup.addInterval(halPos, leftTgtPos, length, reversed);
   }
 
-
   path.clear();
   last = srcSegments.back();
   last.flip();
-  lookup.getPath(srcSegments[0].getSide().getBase(), last.getSide().getBase(),
-                 path);
+  pathStart = srcSegments[0].getSide().getBase();
+  pathEnd = last.getSide().getBase();
+  pathForward = pathStart <= pathEnd;
+  pathLength = 1 + (pathForward ? pathEnd.getPos() - pathStart.getPos() :
+                    pathStart.getPos() - pathEnd.getPos());
+
+  lookup.getPath(pathStart, pathLength, pathForward, path);
 
   CuAssertTrue(testCase, path == tgtSegments);
 
   // try a couple subpaths.
 
   path.clear();
-  lookup.getPath(SGPosition(0, 5), SGPosition(0, 15), path);
+  lookup.getPath(SGPosition(0, 5), 11, true, path);
   CuAssertTrue(testCase, path.size() == 3);
   CuAssertTrue(testCase, path[0] ==
                SGSegment(SGSide(SGPosition(20, 10), false), 5));
@@ -258,7 +266,7 @@ void pathTest(CuTest *testCase)
 
 
   path.clear();
-  lookup.getPath(SGPosition(0, 37), SGPosition(0, 27), path);
+  lookup.getPath(SGPosition(0, 37), 11, false, path);
   CuAssertTrue(testCase, path.size() == 2);
   CuAssertTrue(testCase, path[0] ==
                SGSegment(SGSide(SGPosition(22, 121), false), 2));
@@ -331,7 +339,7 @@ void path2Test(CuTest *testCase)
 
   lookup.addInterval(SGPosition(0, 0), SGPosition(0,63130), 16458, 1);
   vector<SGSegment> path;
-  lookup.getPath(SGPosition(0, 0), SGPosition(0, 16457), path);
+  lookup.getPath(SGPosition(0, 0), 16458, true, path);
 
   // problem seems to be bug in case where path maps to single segment
   // in reverse strand.  now fixed.
@@ -344,7 +352,7 @@ void path2Test(CuTest *testCase)
 
   lookup.addInterval(SGPosition(1, 0), SGPosition(1,63130), 16458, 0);
   path.clear();
-  lookup.getPath(SGPosition(1, 0), SGPosition(1, 16457), path);
+  lookup.getPath(SGPosition(1, 0), 16458, true, path);
 
   CuAssertTrue(testCase, path.size() == 1);
   CuAssertTrue(testCase, path[0].getLength() == 16458);
