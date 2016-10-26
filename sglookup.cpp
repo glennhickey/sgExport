@@ -229,7 +229,7 @@ void SGLookup::getPath(const SGPosition& startPos,
   }
   // merge two consecutive segments that can be walked without a join
   SGSegment nextSeg(prevSgSide, segLen);
-  if (false && !outPath.empty() &&
+  if (!outPath.empty() &&
       outPath.back().getSide().getForward() ==
       nextSeg.getSide().getForward() &&
       outPath.back().getOutSide().lengthTo(nextSeg.getInSide()) == 0)
