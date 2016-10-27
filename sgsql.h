@@ -99,7 +99,7 @@ protected:
    std::string _halPath;
    std::ofstream _outStream;
    std::ofstream _faStream;
-   std::map<sg_seqid_t, std::string> _checksumMap;
+   std::map<sg_int_t, std::string> _checksumMap;
 };
 
 

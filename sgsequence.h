@@ -20,15 +20,15 @@ class SGSequence
 public:
 
    SGSequence();
-   SGSequence(sg_seqid_t id, sg_int_t length, const std::string& name);
+   SGSequence(sg_int_t id, sg_int_t length, const std::string& name);
    ~SGSequence();
 
-   sg_seqid_t getID() const;
+   sg_int_t getID() const;
    sg_int_t getLength() const;
    const std::string& getName() const;
 
-   void set(sg_seqid_t id, sg_int_t length, const std::string& name);
-   void setID(sg_seqid_t id);
+   void set(sg_int_t id, sg_int_t length, const std::string& name);
+   void setID(sg_int_t id);
    void setLength(sg_int_t length);
    void setName(const std::string& name);
 
@@ -37,7 +37,7 @@ public:
 
 protected:
 
-   sg_seqid_t _id;
+   sg_int_t _id;
    sg_int_t _length;
    std::string _name;
 };
@@ -48,7 +48,7 @@ inline SGSequence::SGSequence() : _id(-1), _length(-1)
 {
 }
 
-inline SGSequence::SGSequence(sg_seqid_t id, sg_int_t length,
+inline SGSequence::SGSequence(sg_int_t id, sg_int_t length,
                               const std::string& name) :
   _id(id), _length(length), _name(name)
 {
@@ -58,7 +58,7 @@ inline SGSequence::~SGSequence()
 {
 }
 
-inline sg_seqid_t SGSequence::getID() const
+inline sg_int_t SGSequence::getID() const
 {
   return _id;
 }
@@ -73,7 +73,7 @@ inline const std::string& SGSequence::getName() const
   return _name;
 }
 
-inline void SGSequence::set(sg_seqid_t id, sg_int_t length,
+inline void SGSequence::set(sg_int_t id, sg_int_t length,
                             const std::string& name)
 {
   _id = id;
@@ -81,7 +81,7 @@ inline void SGSequence::set(sg_seqid_t id, sg_int_t length,
   _name = name;
 }
 
-inline void SGSequence::setID(sg_seqid_t id)
+inline void SGSequence::setID(sg_int_t id)
 {
   _id = id;
 }

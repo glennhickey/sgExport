@@ -61,7 +61,7 @@ public:
    /**
     * Fetch sequence using its ID
     */   
-   const SGSequence* getSequence(sg_seqid_t id) const;
+   const SGSequence* getSequence(sg_int_t id) const;
 
    /**
     * Get number of sequences
@@ -134,7 +134,7 @@ inline const SideGraph::JoinSet* SideGraph::getJoinSet() const
   return &_joinSet;
 }
 
-inline const SGSequence* SideGraph::getSequence(sg_seqid_t id)
+inline const SGSequence* SideGraph::getSequence(sg_int_t id)
   const
 {
   return _seqSet.at(id);

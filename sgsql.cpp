@@ -59,7 +59,7 @@ void SGSQL::writeFasta()
     }
     string checksum;
     getChecksum(dnaBuffer, checksum);
-    _checksumMap.insert(pair<sg_seqid_t, string>(seq->getID(), checksum));
+    _checksumMap.insert(pair<sg_int_t, string>(seq->getID(), checksum));
   }
 }
 
@@ -89,7 +89,7 @@ void SGSQL::writeSequenceInserts()
   for (sg_int_t i = 0; i < _sg->getNumSequences(); ++i)
   {
     const SGSequence* seq = _sg->getSequence(i);
-    map<sg_seqid_t, string>::const_iterator j = _checksumMap.find(seq->getID());
+    map<sg_int_t, string>::const_iterator j = _checksumMap.find(seq->getID());
     assert(j != _checksumMap.end());
     _outStream << "INSERT INTO Sequence VALUES ("
                << seq->getID() << ", "

@@ -18,14 +18,14 @@ class SGPosition
 public:
    
    SGPosition();
-   SGPosition(sg_seqid_t seqID, sg_int_t pos);
+   SGPosition(sg_int_t seqID, sg_int_t pos);
    ~SGPosition();
 
-   sg_seqid_t getSeqID() const;
+   sg_int_t getSeqID() const;
    sg_int_t getPos() const;
 
-   void set(sg_seqid_t seqID, sg_int_t pos);
-   void setSeqID(sg_seqid_t seqID);
+   void set(sg_int_t seqID, sg_int_t pos);
+   void setSeqID(sg_int_t seqID);
    void setPos(sg_int_t pos);
 
    bool operator<(const SGPosition& p2) const;
@@ -35,7 +35,7 @@ public:
    
 protected:     
 
-   sg_seqid_t _seqid;
+   sg_int_t _seqid;
    sg_int_t _pos;
 };
 
@@ -46,7 +46,7 @@ inline SGPosition::SGPosition() : _seqid(-1), _pos(-1)
 {
 }
 
-inline SGPosition::SGPosition(sg_seqid_t seqID, sg_int_t pos) :
+inline SGPosition::SGPosition(sg_int_t seqID, sg_int_t pos) :
   _seqid(seqID), _pos(pos)
 {
 }
@@ -55,7 +55,7 @@ inline SGPosition::~SGPosition()
 {
 }
 
-inline sg_seqid_t SGPosition::getSeqID() const
+inline sg_int_t SGPosition::getSeqID() const
 {
   return _seqid;
 }
@@ -65,13 +65,13 @@ inline sg_int_t SGPosition::getPos() const
   return _pos;
 }
 
-inline void SGPosition::set(sg_seqid_t seqID, sg_int_t pos)
+inline void SGPosition::set(sg_int_t seqID, sg_int_t pos)
 {
   _seqid = seqID;
   _pos = pos;
 }
 
-inline void SGPosition::setSeqID(sg_seqid_t seqID)
+inline void SGPosition::setSeqID(sg_int_t seqID)
 {
   _seqid = seqID;
 }

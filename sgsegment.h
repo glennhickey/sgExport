@@ -69,6 +69,8 @@ protected:
 };
 std::ostream& operator<<(std::ostream& os, const SGSegment& s);
 
+typedef std::pair<std::string, std::vector<SGSegment> > SGNamedPath;
+
 inline SGSegment::SGSegment() : _length(-1)
 {
 }
