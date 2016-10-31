@@ -113,7 +113,7 @@ void mapTest(CuTest *testCase)
       if (j % 2 != 0 && i % 2 != 0 && i != 0)
       {
         // invent random target (since we do no checks on this)
-        sg_seqid_t tgtID = rand() % 1000;
+        sg_int_t tgtID = rand() % 1000;
         sg_int_t tgtOffset = rand() % 1000000;
       
         // add block to map
