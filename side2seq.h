@@ -46,7 +46,8 @@ public:
              bool forceUpperCase = false,
              bool makeSequencePaths = false,
              const std::string& seqPathPrefix = "&SG_",
-             int chop = 0);
+             int chop = 0,
+             bool stripSeqNames = false);
 
    /** Convert the graph into a new sidegraph, bases, and paths */
    void convert();
@@ -117,6 +118,7 @@ protected:
    bool _makeSeqPaths;
    std::string _seqPathPrefix;
    int _chop;
+   bool _stripSeqNames;
 
    // map Side Graph to Sequence Graph coords. 
    SGLookup _luTo;

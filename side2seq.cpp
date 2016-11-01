@@ -15,7 +15,7 @@ using namespace std;
 
 Side2Seq::Side2Seq() : _inGraph(NULL), _inBases(NULL), _inPaths(NULL),
                        _outGraph(NULL), _forceUpper(false),
-                       _makeSeqPaths(false), _chop(0)
+                       _makeSeqPaths(false), _chop(0), _stripSeqNames(false)
 {
   
 }
@@ -38,6 +38,7 @@ void Side2Seq::reset()
   _outPaths.clear();
   _joinSet2.clear();
   _chop = 0;
+  _stripSeqNames = false;
 }
 
 void Side2Seq::init(const SideGraph* sg,
@@ -46,7 +47,8 @@ void Side2Seq::init(const SideGraph* sg,
                     bool forceUpperCase,
                     bool makeSequencePaths,
                     const string& seqPathPrefix,
-                    int chop)
+                    int chop,
+                    bool stripSeqNames)
 {
   reset();
   _inGraph = sg;
@@ -59,6 +61,7 @@ void Side2Seq::init(const SideGraph* sg,
   _makeSeqPaths = makeSequencePaths;
   _seqPathPrefix = seqPathPrefix;
   _chop = chop;
+  _stripSeqNames = stripSeqNames;
 
   // re-index joins based on side2
   const SideGraph::JoinSet* js = _inGraph->getJoinSet();
@@ -376,6 +379,10 @@ string Side2Seq::getOutSeqName(const SGSequence* inSeq,
                                const SGPosition& first,
                                int length) const
 {
+  if (_stripSeqNames == true)
+  {
+    return "";
+  }
   stringstream ss;
   ss << inSeq->getName() << "_" << first.getPos();
   return ss.str();
