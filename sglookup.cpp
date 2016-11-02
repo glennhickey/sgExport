@@ -25,11 +25,8 @@ void SGLookup::init(const vector<string>& sequenceNames)
   _mapVec = PosMapVec(sequenceNames.size());
 
   _seqIdToName = sequenceNames;
-  _seqNameToId.clear();
   for (size_t i = 0; i < _seqIdToName.size(); ++i)
   {
-    _seqNameToId.insert(pair<string, sg_int_t>(_seqIdToName[i], sg_int_t(i)));
-
     // add sentinel markers
     PosMap& pm = _mapVec[i];
     pm.insert(pair<sg_int_t, SGSide>(0, SGSide(SideGraph::NullPos, true)));
@@ -43,8 +40,6 @@ void SGLookup::addSequence(const string& sequenceName)
   _mapVec.push_back(PosMap());
   _seqIdToName.push_back(sequenceName);
   size_t i = _seqIdToName.size() - 1;
-
-  _seqNameToId.insert(pair<string, sg_int_t>(_seqIdToName[i], sg_int_t(i)));
 
   // add sentinel markers
   PosMap& pm = _mapVec[i];

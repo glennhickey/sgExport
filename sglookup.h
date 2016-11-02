@@ -83,7 +83,6 @@ protected:
 protected:
 
    PosMapVec _mapVec;
-   SeqNameMap _seqNameToId;
    SeqIdMap _seqIdToName;
 
    friend std::ostream& operator<<(std::ostream& os, const SGLookup& sg);
