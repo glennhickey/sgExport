@@ -130,7 +130,7 @@ SGSide SGLookup::mapPosition(const SGPosition& inPos, sg_int_t* outDist,
     {
       *outDist = inPos.getPos() - i->first;
     }
-    assert(outDist >= 0);
+    assert(*outDist >= 0);
   }
   return outSide;
 }
